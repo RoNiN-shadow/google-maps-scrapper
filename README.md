@@ -9,6 +9,6 @@
 Clone the repo with this command *git clone git@github.com:RoNiN-shadow/google-maps-scrapper.git* (for ssh)
 ### Third thing: use this command *uv sync* to synchronize all packages and dependecies of project.
 
-### Adding the package: *uv pip install [here you write your package name]*
+### Adding the package: *uv add [here you write your package name]*
 ### Running the project: *uv run python main.py*
 
