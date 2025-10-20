@@ -2,9 +2,11 @@ import os, time
 from dotenv import load_dotenv
 import googlemaps
 from find_email_url import find_email_url
+import json
 
+from typing import Any
 
-def scan_local(location: str)-> list[dict[str, str]]:
+def scan_local(location: str)-> list[dict[str, Any]]:
 
     load_dotenv()
 
@@ -14,7 +16,7 @@ def scan_local(location: str)-> list[dict[str, str]]:
 
     results = resturans.get('results',[])
 
-    out = []
+    new_companies = []
     for r in results:
         pid = r['place_id']
         details = gmaps.place(place_id=pid, fields=['name', 'formmated_address', 'website'])
@@ -23,11 +25,12 @@ def scan_local(location: str)-> list[dict[str, str]]:
 
         emails = find_email_url(website) if website else []
 
-        out.append({
+        new_companies.append({
             'name': d.get('name'),
             'adress': d.get('formmated_address'),
             'website' : website,
-            'emails' : emails,
+            'emails' : list(emails),
         })
         time.sleep(0.1)
-    return out
+
+    return new_companies
