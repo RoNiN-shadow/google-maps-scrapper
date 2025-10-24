@@ -1,0 +1,24 @@
+from openai import OpenAI
+from dotenv import load_dotenv
+
+client = OpenAI(
+    api_key=" ", //key for CHAT_GPT
+    base_url="https://openrouter.ai/api/v1"
+)
+def ask_chat(prompt, model="openai/chatgpt-4o-latest"):
+  reply = client.chat.completions.create(
+    model="openai/chatgpt-4o-latest",
+    messages=[
+          {"role": "user",
+          "content": "  "}, //gift who it should be
+          {"role": "user",
+          "content": prompt}
+         ],
+      max_tokens=150,
+      temperature=0.7
+  )
+  return reply
+
+ask = " " //ask somethind
+answer = ask_chat(ask)
+print(answer)
