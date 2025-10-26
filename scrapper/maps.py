@@ -5,19 +5,23 @@ import googlemaps
 
 
 class Maps:
-    def scan_area(self, location: str, type: str):
+    def __init__(self, location: str, type: str):
+        self.location = location
+        self.type = type
+
+    def scan_area(self):
         load_dotenv()
 
         gmaps = googlemaps.Client(key=os.getenv(
             "GOOGLE_MAPS_API_KEY"))
-        geocode_result = gmaps.geocode(location)
+        geocode_result = gmaps.geocode(self.location)
 
         latlng = geocode_result[0]["geometry"]["location"]
 
         coords = (latlng["lat"], latlng["lng"])
 
         restaurants = gmaps.places_nearby(
-            location=coords, radius=5000, type=type)
+            location=coords, radius=5000, type=self.type)
         results = restaurants.get('results', [])
 
         new_companies = []
