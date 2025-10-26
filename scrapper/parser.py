@@ -3,7 +3,7 @@ import re
 
 
 class Parser:
-    def parse(self, html):
+    def parse(self, html) -> list[str]:
 
         soup = BeatifulSoup(html, 'html.parser')
 

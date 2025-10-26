@@ -9,7 +9,7 @@ class Maps:
         self.location = location
         self.type = type
 
-    def scan_area(self):
+    def scan_area(self) -> list[dict]:
         load_dotenv()
 
         gmaps = googlemaps.Client(key=os.getenv(
@@ -36,7 +36,7 @@ class Maps:
             new_companies.append({
                 'name': d.get('name'),
                 'address': d.get('formatted_address'),
-                'website': website,
+                'url': website,
                 'emails': list(email),
             })
             time.sleep(0.1)
